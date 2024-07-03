@@ -1,0 +1,13 @@
+- name: Install IIS
+  hosts: windows_servers
+  gather_facts: true 
+  tasks:
+    - win_feature:
+        name: Web-Server
+        state: present
+        restart: yes
+        include_sub_features: yes
+        include_management_tools: yes
+    - win_copy:
+        src: "files/index.html"
+        dest: "C:\\inetpub\\wwwroot\\ansible.html" 
